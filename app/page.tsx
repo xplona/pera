@@ -153,7 +153,7 @@ const INITIAL_INVENTORY: InventoryItem[] = [
     safetyStock: 15, 
     price: 1250.50, 
     cost: 750,
-    supplier: "Temu",
+    supplier: "Temu", 
     category: "Elektronik",
     image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=100&h=100"
   },
@@ -1229,7 +1229,7 @@ function LoginPage({ onLogin }: any) {
         <div className="bg-[#BE6A6C] p-8 text-center">
           <div className="inline-flex p-3 bg-white rounded-xl shadow-lg mb-4">
              <img 
-              src="perabalontrendyol.png" 
+              src="perabalon.png" 
               alt="Pera Balon" 
               className="w-16 h-16 object-contain"
               onError={(e: any) => {
@@ -2143,7 +2143,7 @@ export default function App() {
       <div className="hidden md:flex w-20 lg:w-64 bg-white border-r border-gray-200 flex-col justify-between z-10 h-full">
         <div>
           <div className="p-6 flex items-center gap-3">
-            <img src="perabalontrendyol.png" alt="Pera Balon" className="w-10 h-10 object-contain rounded-lg" onError={(e: any) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<div class="w-10 h-10 bg-[#BE6A6C] rounded-lg flex items-center justify-center text-white font-bold shadow-[#BE6A6C]/40 shadow-lg">P</div><span class="font-bold text-xl hidden lg:block text-gray-800 ml-3">Pera Balon</span>'; }} />
+            <img src="perabalon.png" alt="Pera Balon" className="w-10 h-10 object-contain rounded-lg" onError={(e: any) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<div class="w-10 h-10 bg-[#BE6A6C] rounded-lg flex items-center justify-center text-white font-bold shadow-[#BE6A6C]/40 shadow-lg">P</div><span class="font-bold text-xl hidden lg:block text-gray-800 ml-3">Pera Balon</span>'; }} />
             <span className="font-bold text-xl hidden lg:block text-gray-800">Pera Balon</span>
           </div>
           <nav className="px-3 space-y-2 mt-4">
@@ -2222,11 +2222,21 @@ export default function App() {
       )}
 
       <div className="flex-1 flex flex-col h-full overflow-hidden bg-gray-50/50">
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20 shrink-0">
+        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20 shrink-0 relative">
           <div className="flex items-center bg-gray-100/50 px-3 py-2 rounded-lg w-full max-w-[200px] md:max-w-xs border border-transparent focus-within:border-[#BE6A6C]/50 focus-within:bg-white focus-within:shadow-sm transition-all duration-200">
              <Search size={18} className="text-gray-400 shrink-0" />
              <input type="text" placeholder="Ara..." className="bg-transparent border-none focus:outline-none ml-2 text-sm w-full placeholder-gray-400" />
           </div>
+
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+             <img 
+               src="perabalon.png" 
+               alt="Pera Balon" 
+               className="h-8 object-contain" 
+               onError={(e: any) => e.target.style.display = 'none'} 
+             />
+          </div>
+
           <div className="flex items-center gap-3">
              {/* Mobile Profile Icon */}
             <div className="md:hidden w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm" onClick={() => setIsSidebarOpen(true)}>
