@@ -2100,7 +2100,7 @@ export default function App() {
         return (
           <div className="space-y-6 pb-24 md:pb-0">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <h2 className="text-2xl font-bold text-gray-800">Tedarik Zinciri</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Tedarik</h2>
               <div className="flex items-center gap-3">
                  <FilterGroup options={supplyOptions} activeFilter={supplyFilter} onFilterChange={setSupplyFilter} />
                 <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-emerald-700 transition shadow-sm whitespace-nowrap"><Plus size={18} /> Tedarik Siparişi Gir</button>
