@@ -183,7 +183,7 @@ const INITIAL_INVENTORY: InventoryItem[] = [
   },
   { 
     id: 5, 
-    name: "Oyun Hamuru Seti", 
+    name: "Oyun Hamuru Seti (12 Renk)", 
     sku: "OY-004", 
     stock: 200, 
     safetyStock: 30, 
@@ -193,6 +193,42 @@ const INITIAL_INVENTORY: InventoryItem[] = [
     category: "Eğitici",
     image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=100&h=100"
   },
+  { 
+    id: 6, 
+    name: "LED Işık Şeridi (5m)", 
+    sku: "EL-005", 
+    stock: 85, 
+    safetyStock: 10, 
+    price: 150, 
+    cost: 70, 
+    supplier: "AliExpress",
+    category: "Elektronik",
+    image: "https://images.unsplash.com/photo-1563456020-0551061917f8?auto=format&fit=crop&q=80&w=100&h=100"
+  },
+  { 
+    id: 7, 
+    name: "Renkli Balon Paketi (100'lü)", 
+    sku: "BL-001", 
+    stock: 500, 
+    safetyStock: 100, 
+    price: 85, 
+    cost: 30, 
+    supplier: "Parti Dünyası",
+    category: "Parti",
+    image: "https://images.unsplash.com/photo-1530103862676-de3c9da59af7?auto=format&fit=crop&q=80&w=100&h=100"
+  },
+  { 
+    id: 8, 
+    name: "Helyum Tüpü (Kullan-At)", 
+    sku: "BL-002", 
+    stock: 12, 
+    safetyStock: 5, 
+    price: 850, 
+    cost: 450, 
+    supplier: "Parti Dünyası",
+    category: "Parti",
+    image: "https://images.unsplash.com/photo-1582236873967-0c7f2122396e?auto=format&fit=crop&q=80&w=100&h=100"
+  }
 ];
 
 const INITIAL_ORDERS: Order[] = [
@@ -248,6 +284,32 @@ const INITIAL_ORDERS: Order[] = [
     total: 80.00, 
     assignedTo: null 
   },
+  { 
+    id: 105, 
+    customer: "Zeynep Kaya", 
+    city: "Antalya", 
+    address: "Lara Yolu Üzeri, No:15, Muratpaşa",
+    platform: "Trendyol", 
+    items: [{ name: "Oyun Hamuru Seti (12 Renk)", qty: 2 }],
+    date: getRelativeDate(1), 
+    deadline: getRelativeDate(3), 
+    status: "Yeni", 
+    total: 240.00, 
+    assignedTo: null 
+  },
+  { 
+    id: 106, 
+    customer: "Parti Organizasyon Ltd.", 
+    city: "İstanbul", 
+    address: "Etiler Mah. Nispetiye Cad. No:100, Beşiktaş",
+    platform: "B2B Panel", 
+    items: [{ name: "Renkli Balon Paketi (100'lü)", qty: 20 }, { name: "Helyum Tüpü (Kullan-At)", qty: 5 }],
+    date: getRelativeDate(0), 
+    deadline: getRelativeDate(2), 
+    status: "Hazırlanıyor", 
+    total: 5950.00, 
+    assignedTo: "Mehmet Demir" 
+  }
 ];
 
 const INITIAL_SUPPLIES: Supply[] = [
@@ -1069,7 +1131,8 @@ function LoginPage({ onLogin }: any) {
           role: 'Yönetici',
           email: email,
           phone: '0555 701 00 24',
-          initials: 'OB'
+          initials: 'OB',
+          avatarPreview: '/osmanbasarfoto.png' // Giriş yapınca fotoyu otomatik alması için ekledik
         });
       } else {
         setError('Hatalı e-posta veya şifre.');
