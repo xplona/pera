@@ -1997,7 +1997,7 @@ export default function App() {
                     {u.avatarPreview ? (
                       <img src={u.avatarPreview} alt={u.name} className="w-full h-full object-cover" />
                     ) : (
-                      u.initials
+                      <User size={32} className="text-white" /> // Profil resmi yoksa ikon göster
                     )}
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">{u.name}</h3>
@@ -2026,8 +2026,12 @@ export default function App() {
             <h2 className="text-2xl font-bold text-gray-800">Profil Ayarları</h2>
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100 flex items-center gap-4">
-                 <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-2xl font-bold text-white shadow-md">
-                    {user.name.split(' ').map((n: string) => n[0]).join('')}
+                 <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-2xl font-bold text-white shadow-md overflow-hidden">
+                    {user.avatarPreview ? (
+                      <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <User size={32} />
+                    )}
                  </div>
                  <div>
                     <h3 className="text-xl font-bold text-gray-900">{user.name}</h3>
@@ -2157,7 +2161,13 @@ export default function App() {
         </div>
         <div className="p-4 border-t border-gray-100">
           <div onClick={() => setActiveTab('profile')} className={`flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition mb-2 ${activeTab === 'profile' ? 'bg-[#BE6A6C]/10 border border-[#BE6A6C]/20' : ''}`}>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm">{user.name.split(' ').map((n: string) => n[0]).join('')}</div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm overflow-hidden">
+                {user.avatarPreview ? (
+                  <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <User size={16} />
+                )}
+            </div>
             <div className="hidden lg:block"><p className="text-sm font-medium text-gray-700">{user.name}</p><p className="text-xs text-gray-400">{user.role}</p></div>
           </div>
           <button onClick={handleLogout} className="w-full flex items-center gap-3 p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
@@ -2223,7 +2233,7 @@ export default function App() {
 
       <div className="flex-1 flex flex-col h-full overflow-hidden bg-gray-50/50">
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20 shrink-0 relative">
-          <div className="flex items-center bg-gray-100/50 px-3 py-2 rounded-lg w-full max-w-[200px] md:max-w-xs border border-transparent focus-within:border-[#BE6A6C]/50 focus-within:bg-white focus-within:shadow-sm transition-all duration-200">
+          <div className="flex items-center bg-gray-100/50 px-3 py-2 rounded-lg w-full max-w-[200px] md:max-w-[240px] border border-transparent focus-within:border-[#BE6A6C]/50 focus-within:bg-white focus-within:shadow-sm transition-all duration-200">
              <Search size={18} className="text-gray-400 shrink-0" />
              <input type="text" placeholder="Ara..." className="bg-transparent border-none focus:outline-none ml-2 text-sm w-full placeholder-gray-400" />
           </div>
@@ -2239,8 +2249,12 @@ export default function App() {
 
           <div className="flex items-center gap-3">
              {/* Mobile Profile Icon */}
-            <div className="md:hidden w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm" onClick={() => setIsSidebarOpen(true)}>
-              {user.name.split(' ').map((n: string) => n[0]).join('')}
+            <div className="md:hidden w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm overflow-hidden" onClick={() => setIsSidebarOpen(true)}>
+               {user.avatarPreview ? (
+                  <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <User size={16} />
+                )}
             </div>
             <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition hidden md:block">
                <Bell size={20} />
