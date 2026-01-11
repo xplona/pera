@@ -217,7 +217,8 @@ const INITIAL_SUPPLIES: Supply[] = [
 ];
 
 const INITIAL_USERS: UserData[] = [
-  { id: 1, name: "Osman BAŞAR", role: "Yönetici", email: "osibasar@gmail.com", phone: "0555 701 00 24", avatar: null, initials: "OB" },
+  // avatarPreview kısmını ekledik:
+  { id: 1, name: "Osman BAŞAR", role: "Yönetici", email: "osibasar@gmail.com", phone: "0555 701 00 24", avatar: null, initials: "OB", avatarPreview: '/osmanbasarfoto.png' },
   { id: 2, name: "Mehmet Demir", role: "Depo Sorumlusu", email: "mehmet@perabalon.com", phone: "0532 111 22 33", avatar: null, initials: "MD" },
   { id: 3, name: "Selin Yılmaz", role: "Satış Uzmanı", email: "selin@perabalon.com", phone: "0544 222 33 44", avatar: null, initials: "SY" },
 ];
@@ -1213,7 +1214,8 @@ function LoginPage({ onLogin }: any) {
           role: 'Yönetici',
           email: email,
           phone: '0555 701 00 24',
-          initials: 'OB'
+          initials: 'OB',
+          avatarPreview: '/osmanbasarfoto.png' // Giriş yapınca fotoyu otomatik alması için ekledik
         });
       } else {
         setError('Hatalı e-posta veya şifre.');
@@ -2105,45 +2107,9 @@ export default function App() {
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans text-gray-800 relative overflow-hidden">
-      {/* Toast Bildirim */}
-      {toast && (
-        <Toast 
-          message={toast} 
-          onClose={() => setToast(null)} 
-        />
-      )}
-
-      {selectedOrder && (
-        <OrderDetailModal 
-          order={selectedOrder} 
-          onClose={() => setSelectedOrder(null)} 
-          onEdit={() => {
-            handleOpenOrderModal(selectedOrder);
-            setSelectedOrder(null);
-          }}
-          inventory={inventory} // inventory prop added
-        />
-      )}
+      {/* ... existing code ... */}
       
-      {selectedSupply && <SupplyDetailModal supply={selectedSupply} onClose={() => setSelectedSupply(null)} />}
-      {isUserModalOpen && <UserFormModal onClose={() => setIsUserModalOpen(false)} onSave={handleSaveUser} user={editingUser} />}
-      {isProductModalOpen && <ProductFormModal onClose={() => setIsProductModalOpen(false)} onSave={handleSaveProduct} product={editingProduct} />}
-      {isOrderModalOpen && <OrderFormModal onClose={() => setIsOrderModalOpen(false)} onSave={handleSaveOrder} inventory={inventory} users={users} order={editingOrder} />}
-      
-      {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal 
-        isOpen={!!productToDelete} 
-        onClose={() => setProductToDelete(null)} 
-        onConfirm={confirmDeleteProduct}
-        itemName={productToDelete?.name}
-      />
-
-      {/* Profil Modalları */}
-      {isPasswordModalOpen && <ChangePasswordModal onClose={() => setIsPasswordModalOpen(false)} />}
-      {isSettingsModalOpen && <NotificationSettingsModal onClose={() => setIsSettingsModalOpen(false)} />}
-      {isPrivacyModalOpen && <PrivacySettingsModal onClose={() => setIsPrivacyModalOpen(false)} />}
-      
-      {/* Desktop Sidebar */}
+      {/* Desktop Sidebar (SOL MENÜ) */}
       <div className="hidden md:flex w-20 lg:w-64 bg-white border-r border-gray-200 flex-col justify-between z-10 h-full">
         <div>
           <div className="p-6 flex items-center gap-3">
@@ -2151,124 +2117,38 @@ export default function App() {
             <span className="font-bold text-xl hidden lg:block text-gray-800">Pera Balon</span>
           </div>
           <nav className="px-3 space-y-2 mt-4">
-            <button onClick={() => setActiveTab('dashboard')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'dashboard' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><LayoutDashboard size={20} /><span className="hidden lg:block">Ana Sayfa</span></button>
+            {/* BURADA LayoutDashboard YERİNE LOGO RESMİNİ KOYUYORUZ */}
+            <button onClick={() => setActiveTab('dashboard')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'dashboard' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}>
+              <img src="/perabalon.png" alt="Ana Sayfa" className="w-5 h-5 object-contain" />
+              <span className="hidden lg:block">Ana Sayfa</span>
+            </button>
+
             <button onClick={() => setActiveTab('orders')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'orders' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><ShoppingCart size={20} /><span className="hidden lg:block">Siparişler</span></button>
-            <button onClick={() => setActiveTab('inventory')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'inventory' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><Package size={20} /><span className="hidden lg:block">Stok & Ürün</span></button>
-            <button onClick={() => setActiveTab('finance')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'finance' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><PieChart size={20} /><span className="hidden lg:block">Finans</span></button>
-            <button onClick={() => setActiveTab('supplies')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'supplies' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><Truck size={20} /><span className="hidden lg:block">Tedarik (Temu)</span></button>
-            <button onClick={() => setActiveTab('users')} className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${activeTab === 'users' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C] font-medium' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}><Users size={20} /><span className="hidden lg:block">Ekip</span></button>
+            {/* ... diğer menü öğeleri aynı kalacak ... */}
+            
+            {/* ... existing code ... */}
           </nav>
         </div>
-        <div className="p-4 border-t border-gray-100">
-          <div onClick={() => setActiveTab('profile')} className={`flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition mb-2 ${activeTab === 'profile' ? 'bg-[#BE6A6C]/10 border border-[#BE6A6C]/20' : ''}`}>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm overflow-hidden">
-                {user.avatarPreview ? (
-                  <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
-                ) : (
-                  <User size={16} />
-                )}
-            </div>
-            <div className="hidden lg:block"><p className="text-sm font-medium text-gray-700">{user.name}</p><p className="text-xs text-gray-400">{user.role}</p></div>
-          </div>
-          <button onClick={handleLogout} className="w-full flex items-center gap-3 p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
-            <LogOut size={20} />
-            <span className="hidden lg:block text-sm font-medium">Çıkış Yap</span>
-          </button>
-        </div>
+        {/* ... existing code ... */}
       </div>
       
-      {/* Mobile Bottom Navigation */}
+      {/* Mobile Bottom Navigation (MOBİL ALT MENÜ) */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around p-3 z-50 shadow-lg pb-safe">
+        {/* BURADA DA LayoutDashboard YERİNE LOGO RESMİNİ KOYUYORUZ */}
         <button onClick={() => setActiveTab('dashboard')} className={`flex flex-col items-center gap-1 ${activeTab === 'dashboard' ? 'text-[#BE6A6C]' : 'text-gray-400'}`}>
-          <LayoutDashboard size={24} />
+          <img src="/perabalon.png" alt="Ana Sayfa" className="w-6 h-6 object-contain" />
           <span className="text-[10px] font-medium">Ana Sayfa</span>
         </button>
+
         <button onClick={() => setActiveTab('orders')} className={`flex flex-col items-center gap-1 ${activeTab === 'orders' ? 'text-[#BE6A6C]' : 'text-gray-400'}`}>
           <ShoppingCart size={24} />
           <span className="text-[10px] font-medium">Sipariş</span>
         </button>
-        <button onClick={() => setActiveTab('inventory')} className={`flex flex-col items-center gap-1 ${activeTab === 'inventory' ? 'text-[#BE6A6C]' : 'text-gray-400'}`}>
-          <Package size={24} />
-          <span className="text-[10px] font-medium">Stok</span>
-        </button>
-        <button onClick={() => setActiveTab('finance')} className={`flex flex-col items-center gap-1 ${activeTab === 'finance' ? 'text-[#BE6A6C]' : 'text-gray-400'}`}>
-          <PieChart size={24} />
-          <span className="text-[10px] font-medium">Finans</span>
-        </button>
-         <button onClick={() => setIsSidebarOpen(true)} className={`flex flex-col items-center gap-1 text-gray-400`}>
-          <Menu size={24} />
-          <span className="text-[10px] font-medium">Menü</span>
-        </button>
+        {/* ... diğer menü öğeleri aynı kalacak ... */}
+
+        {/* ... existing code ... */}
       </nav>
-
-      {/* Mobile Sidebar Drawer */}
-      {isSidebarOpen && (
-        <div className="fixed inset-0 z-[60] flex md:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsSidebarOpen(false)}></div>
-          <div className="relative bg-white w-64 h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300 ml-auto">
-            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-               <span className="font-bold text-xl text-gray-800">Menü</span>
-               <button onClick={() => setIsSidebarOpen(false)} className="p-2 hover:bg-gray-200 rounded-full"><X size={24} /></button>
-            </div>
-            <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
-                <button onClick={() => { setActiveTab('supplies'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'supplies' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
-                  <Truck size={20} /> <span className="font-medium">Tedarik Zinciri</span>
-                </button>
-                <button onClick={() => { setActiveTab('users'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'users' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
-                  <Users size={20} /> <span className="font-medium">Ekip</span>
-                </button>
-                <div className="h-px bg-gray-100 my-2"></div>
-                <button onClick={() => { setActiveTab('profile'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'profile' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
-                  <User size={20} /> <span className="font-medium">Profilim</span>
-                </button>
-            </nav>
-            <div className="p-4 border-t border-gray-100 bg-gray-50">
-              <button onClick={handleLogout} className="w-full flex items-center gap-3 p-3 rounded-lg text-red-500 hover:bg-red-50 font-medium">
-                <LogOut size={20} /> Çıkış Yap
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="flex-1 flex flex-col h-full overflow-hidden bg-gray-50/50">
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20 shrink-0 relative">
-          <div className="flex items-center bg-gray-100/50 px-3 py-2 rounded-lg w-full max-w-[200px] md:max-w-[240px] border border-transparent focus-within:border-[#BE6A6C]/50 focus-within:bg-white focus-within:shadow-sm transition-all duration-200">
-             <Search size={18} className="text-gray-400 shrink-0" />
-             <input type="text" placeholder="Ara..." className="bg-transparent border-none focus:outline-none ml-2 text-sm w-full placeholder-gray-400" />
-          </div>
-
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-             <img 
-               src="perabalon.png" 
-               alt="Pera Balon" 
-               className="h-8 object-contain" 
-               onError={(e: any) => e.target.style.display = 'none'} 
-             />
-          </div>
-
-          <div className="flex items-center gap-3">
-             {/* Mobile Profile Icon */}
-            <div className="md:hidden w-8 h-8 rounded-full bg-gradient-to-tr from-[#BE6A6C] to-[#A15A5B] flex items-center justify-center text-xs font-bold text-white shadow-sm overflow-hidden" onClick={() => setIsSidebarOpen(true)}>
-               {user.avatarPreview ? (
-                  <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
-                ) : (
-                  <User size={16} />
-                )}
-            </div>
-            <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition hidden md:block">
-               <Bell size={20} />
-               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
-            </button>
-          </div>
-        </header>
-        
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-24 md:pb-6 scroll-smooth">
-          <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
-            {renderContent()}
-          </div>
-        </main>
-      </div>
+      {/* ... existing code ... */}
     </div>
   );
 }
