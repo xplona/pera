@@ -2378,7 +2378,7 @@ export default function App() {
             </div>
             <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
                 <button onClick={() => { setActiveTab('supplies'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'supplies' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
-                  <Truck size={20} /> <span className="font-medium">Tedarik Zinciri</span>
+                  <Truck size={20} /> <span className="font-medium">Tedarik</span>
                 </button>
                 <button onClick={() => { setActiveTab('users'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'users' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
                   <Users size={20} /> <span className="font-medium">Ekip</span>
