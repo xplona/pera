@@ -1008,190 +1008,6 @@ function UserFormModal({ onClose, onSave, user }: any) {
   );
 }
 
-function OrderDetailModal({ order, onClose, onEdit, inventory }: any) {
-  if (!order) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-        <div className="bg-gray-50 p-6 border-b border-gray-100 flex justify-between items-center">
-          <div>
-            <h3 className="text-xl font-bold text-gray-800">Sipariş #{order.id}</h3>
-            <p className="text-sm text-gray-500">{order.date} tarihinde oluşturuldu</p>
-          </div>
-          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition">
-            <X size={20} className="text-gray-500" />
-          </button>
-        </div>
-        <div className="p-6 space-y-6">
-          <div className="flex items-center justify-between">
-            <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(order.status)}`}>
-              {order.status}
-            </span>
-            <span className="text-2xl font-bold text-[#BE6A6C]">{formatCurrency(order.total)}</span>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 mb-2 text-gray-500">
-                <Users size={16} />
-                <span className="text-xs font-medium uppercase">Müşteri</span>
-              </div>
-              <p className="font-semibold text-gray-900">{order.customer}</p>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 mb-2 text-gray-500">
-                <MapPin size={16} />
-                <span className="text-xs font-medium uppercase">Şehir</span>
-              </div>
-              <p className="font-semibold text-gray-900">{order.city}</p>
-            </div>
-            {/* Adres Alanı Eklendi */}
-            <div className="col-span-2 p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 mb-2 text-gray-500">
-                <MapPin size={16} />
-                <span className="text-xs font-medium uppercase">Açık Adres</span>
-              </div>
-              <p className="font-semibold text-gray-900 text-sm">{order.address || "Adres bilgisi girilmemiş."}</p>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 mb-2 text-gray-500">
-                <Store size={16} />
-                <span className="text-xs font-medium uppercase">Platform</span>
-              </div>
-              <p className="font-semibold text-gray-900">{order.platform}</p>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <div className="flex items-center gap-2 mb-2 text-gray-500">
-                <Calendar size={16} />
-                <span className="text-xs font-medium uppercase">Termin</span>
-              </div>
-              <p className="font-semibold text-gray-900">{order.deadline}</p>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wide">Sipariş İçeriği</h4>
-            <ul className="space-y-3">
-              {order.items.map((item: any, index: number) => (
-                <li key={index} className="flex items-center gap-4 p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition">
-                  <img 
-                    src={getProductImage(item.name, inventory)} 
-                    alt={item.name} 
-                    className="w-12 h-12 rounded-lg object-cover bg-gray-100"
-                  />
-                  <div className="flex-1">
-                    <p className="text-gray-800 font-semibold">{item.name}</p>
-                    <p className="text-sm text-gray-500">{item.qty} Adet</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
-          <button onClick={onClose} className="px-4 py-2 text-gray-600 font-medium hover:bg-gray-200 rounded-lg transition">Kapat</button>
-          <button 
-            onClick={() => onEdit(order)} // Düzenle butonuna onEdit bağlandı
-            className="px-4 py-2 bg-[#BE6A6C] text-white font-medium rounded-lg hover:bg-[#A15A5B] transition"
-          >
-            Düzenle
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SupplyDetailModal({ supply, onClose }: any) {
-  if (!supply) return null;
-
-  const steps = [
-    { label: 'Sipariş Oluşturuldu', date: supply.orderDate, completed: true, icon: FileText },
-    { label: 'Kargoya Verildi', date: '---', completed: ['Kargolandı', 'Yolda', 'Gümrükte', 'Teslim Edildi'].includes(supply.status), icon: Truck },
-    { label: 'Gümrük / Transfer', date: '---', completed: ['Gümrükte', 'Teslim Edildi'].includes(supply.status), active: supply.status === 'Gümrükte', icon: Anchor },
-    { label: 'Teslim Edildi', date: '---', completed: supply.status === 'Teslim Edildi', icon: CheckCircle2 }
-  ];
-
-  return (
-    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-        <div className="bg-gray-50 p-6 border-b border-gray-100 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600">
-               <Truck size={20} />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-gray-800">{supply.supplier}</h3>
-              <p className="text-sm text-gray-500">Tedarikçi Detayı</p>
-            </div>
-          </div>
-          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition">
-            <X size={20} className="text-gray-500" />
-          </button>
-        </div>
-        <div className="p-6 space-y-6">
-          <div className="flex items-center justify-between">
-             <span className={`px-3 py-1 rounded-full text-sm font-semibold border ${getStatusColor(supply.status)}`}>
-              {supply.status}
-            </span>
-             <div className="text-right">
-                <p className="text-xs text-gray-500 uppercase font-medium">Tahmini Varış</p>
-                <p className="text-gray-900 font-bold">{supply.estimatedArrival}</p>
-             </div>
-          </div>
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex items-center justify-between">
-             <div>
-                <p className="text-xs text-gray-500 mb-1">Kargo Takip No</p>
-                <p className="font-mono text-gray-800 font-bold text-lg">{supply.tracking}</p>
-             </div>
-             <button className="p-2 bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-[#BE6A6C] hover:border-[#BE6A6C]/30 transition">
-                <Copy size={18} />
-             </button>
-          </div>
-          <div>
-            <h4 className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-wide">İçerik</h4>
-            <p className="text-gray-800 bg-white border border-gray-100 p-3 rounded-lg shadow-sm">
-              {supply.items}
-            </p>
-          </div>
-          <div>
-             <h4 className="text-sm font-medium text-gray-500 mb-4 uppercase tracking-wide">Gönderi Geçmişi</h4>
-             <div className="space-y-0 pl-2">
-                {steps.map((step, index) => (
-                  <div key={index} className="flex gap-4 pb-6 last:pb-0 relative">
-                     {index !== steps.length - 1 && (
-                        <div className={`absolute left-[15px] top-8 bottom-0 w-0.5 ${step.completed ? 'bg-emerald-200' : 'bg-gray-200'}`}></div>
-                     )}
-                     <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center border-2 flex-shrink-0 ${
-                        step.completed 
-                           ? 'bg-emerald-100 border-emerald-500 text-emerald-600' 
-                           : step.active 
-                              ? 'bg-blue-100 border-blue-500 text-blue-600 animate-pulse'
-                              : 'bg-gray-50 border-gray-200 text-gray-300'
-                     }`}>
-                        <step.icon size={14} />
-                     </div>
-                     <div className="flex-1 pt-1">
-                        <div className="flex justify-between items-start">
-                           <h5 className={`font-medium text-sm ${step.completed || step.active ? 'text-gray-900' : 'text-gray-400'}`}>
-                              {step.label}
-                           </h5>
-                           <span className="text-xs text-gray-400 font-mono">{step.date !== '---' ? step.date : ''}</span>
-                        </div>
-                        {step.active && <p className="text-xs text-blue-600 mt-1 font-medium">Şu an işlem görüyor...</p>}
-                     </div>
-                  </div>
-                ))}
-             </div>
-          </div>
-        </div>
-        <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
-          <button onClick={onClose} className="px-4 py-2 text-gray-600 font-medium hover:bg-gray-200 rounded-lg transition">Kapat</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function LoginPage({ onLogin }: any) {
   // Geliştirme kolaylığı için varsayılan değerler eklendi
   const [email, setEmail] = useState('osibasar@gmail.com');
@@ -2251,10 +2067,15 @@ export default function App() {
                   <User size={16} />
                 )}
             </div>
-            <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition hidden md:block">
-               <Bell size={20} />
-               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
-            </button>
+            
+             {/* Desktop Profile Icon (Replaces Bell) */}
+             <div className="hidden md:flex w-9 h-9 rounded-full bg-gray-100 border border-gray-200 items-center justify-center overflow-hidden">
+               {user.avatarPreview ? (
+                  <img src={user.avatarPreview} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <User size={18} className="text-gray-500" />
+                )}
+            </div>
           </div>
         </header>
         
