@@ -1268,10 +1268,41 @@ function LoginPage({ onLogin }: any) {
   );
 }
 
+// --- SPLASH SCREEN BİLEŞENİ ---
+
+const SplashScreen = () => (
+  <div className="fixed inset-0 bg-[#BE6A6C] z-[9999] flex items-center justify-center flex-col animate-in fade-in duration-700">
+    <div className="animate-pulse">
+      {/* Logoyu beyaz bir daire içinde gösteriyoruz ki daha belirgin olsun */}
+      <div className="w-40 h-40 bg-white rounded-full flex items-center justify-center p-6 shadow-2xl">
+         <img src="perabalon.png" alt="Pera Balon" className="w-full h-full object-contain" />
+      </div>
+    </div>
+    <div className="mt-8 text-center">
+       <h1 className="text-white text-3xl font-bold tracking-tight">PERA BALON</h1>
+       <p className="text-white/80 text-sm mt-2 font-medium tracking-wide uppercase">Stok & Sipariş Takip Sistemi</p>
+    </div>
+    
+    {/* Alt kısımda yükleniyor ibaresi */}
+    <div className="absolute bottom-10 flex flex-col items-center gap-2">
+       <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
-  
+  const [isLoadingApp, setIsLoadingApp] = useState(true); // Splash Screen State
+
+  // Splash Screen Effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingApp(false);
+    }, 2500); // 2.5 saniye sonra splash screen kapanır
+    return () => clearTimeout(timer);
+  }, []);
+
   // Auth State (Auto-Login with localStorage)
   const [user, setUser] = useState(() => {
     try {
@@ -1507,6 +1538,8 @@ export default function App() {
   };
 
   const handleLogin = (userData: any) => {
+    // Giriş yapınca menünün kapalı olduğundan emin ol
+    setIsSidebarOpen(false); 
     setUser(userData);
     localStorage.setItem('peraBalonUser', JSON.stringify(userData));
   };
@@ -1599,6 +1632,14 @@ export default function App() {
     setEditingOrder(null);
   };
 
+  // --- RENDER LOGIC ---
+
+  // 1. Splash Screen Kontrolü
+  if (isLoadingApp) {
+    return <SplashScreen />;
+  }
+
+  // 2. Login Kontrolü
   if (!user) {
     return <LoginPage onLogin={handleLogin} />;
   }
