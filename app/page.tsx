@@ -383,19 +383,19 @@ function getProductImage(productName: string, inventory: InventoryItem[]) {
 
 function Card({ title, value, icon: Icon, alert = false, subtext, trend }: any) {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
+    <div className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-500 mb-1">{title}</p>
-        <h3 className={`text-2xl font-bold ${alert ? 'text-red-600' : 'text-gray-800'}`}>{value}</h3>
-        {subtext && <p className="text-xs text-gray-400 mt-1">{subtext}</p>}
+        <p className="text-xs md:text-sm font-medium text-gray-500 mb-1">{title}</p>
+        <h3 className={`text-xl md:text-2xl font-bold ${alert ? 'text-red-600' : 'text-gray-800'}`}>{value}</h3>
+        {subtext && <p className="text-[10px] md:text-xs text-gray-400 mt-1">{subtext}</p>}
       </div>
       <div className="flex flex-col items-end gap-2">
-        <div className={`p-3 rounded-lg ${alert ? 'bg-red-50 text-red-600' : 'bg-[#BE6A6C]/10 text-[#BE6A6C]'}`}>
-          <Icon size={24} />
+        <div className={`p-2 md:p-3 rounded-lg ${alert ? 'bg-red-50 text-red-600' : 'bg-[#BE6A6C]/10 text-[#BE6A6C]'}`}>
+          <Icon size={20} className="md:w-6 md:h-6" />
         </div>
         {trend && (
-          <span className={`text-xs font-bold flex items-center ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-            {trend === 'up' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />} 
+          <span className={`text-[10px] md:text-xs font-bold flex items-center ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+            {trend === 'up' ? <ArrowUpRight size={12} className="md:w-[14px] md:h-[14px]" /> : <ArrowDownRight size={12} className="md:w-[14px] md:h-[14px]" />} 
             %12
           </span>
         )}
@@ -1802,7 +1802,7 @@ export default function App() {
                 onFilterChange={setDashboardPeriod} 
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               <Card title={`${dashboardPeriod} Ciro`} value={formatCurrency(dashData.revenue)} icon={Banknote} trend="up" subtext="Satışlardan gelen" />
               <Card title={`${dashboardPeriod} Sipariş`} value={dashData.orderCount} icon={ShoppingCart} subtext="Toplam adet" />
               <Card title={`${dashboardPeriod} Kâr`} value={formatCurrency(dashData.profit)} icon={Wallet} trend="up" subtext="Tahmini net" />
@@ -1892,8 +1892,8 @@ export default function App() {
                 </button>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-visible">
-              <table className="w-full text-left">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+              <table className="w-full text-left min-w-[600px]">
                 <thead className="bg-gray-50 border-b border-gray-100">
                   <tr>
                     <th className="p-4 font-medium text-gray-500 text-sm">Ürün</th>
@@ -2100,7 +2100,7 @@ export default function App() {
         return (
           <div className="space-y-6 pb-24 md:pb-0">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <h2 className="text-2xl font-bold text-gray-800">Tedarik</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Tedarik Zinciri</h2>
               <div className="flex items-center gap-3">
                  <FilterGroup options={supplyOptions} activeFilter={supplyFilter} onFilterChange={setSupplyFilter} />
                 <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-emerald-700 transition shadow-sm whitespace-nowrap"><Plus size={18} /> Tedarik Siparişi Gir</button>
@@ -2378,7 +2378,7 @@ export default function App() {
             </div>
             <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
                 <button onClick={() => { setActiveTab('supplies'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'supplies' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
-                  <Truck size={20} /> <span className="font-medium">Tedarik</span>
+                  <Truck size={20} /> <span className="font-medium">Tedarik Zinciri</span>
                 </button>
                 <button onClick={() => { setActiveTab('users'); setIsSidebarOpen(false); }} className={`w-full flex items-center gap-3 p-3 rounded-lg ${activeTab === 'users' ? 'bg-[#BE6A6C]/10 text-[#BE6A6C]' : 'text-gray-600'}`}>
                   <Users size={20} /> <span className="font-medium">Ekip</span>
