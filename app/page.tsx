@@ -1138,7 +1138,7 @@ function UserFormModal({ onClose, onSave, user }: any) {
           </div>
 
           <div className="pt-4 flex gap-3 shrink-0 pb-safe">
-            <button type="button" onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100">İptal</button>
+            <button type="button" onClick={onClose} className="flex-1 px-4 py-2 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50">İptal</button>
             <button type="submit" className="flex-1 px-4 py-2 bg-[#BE6A6C] text-white rounded-lg hover:bg-[#A15A5B]">Kaydet</button>
           </div>
         </form>
@@ -1456,7 +1456,7 @@ function LoginPage({ onLogin }: any) {
 
 const SplashScreen = () => (
   <div className="fixed inset-0 bg-white z-[9999] flex items-center justify-center animate-in fade-in duration-700">
-    <div className="w-full px-4 md:px-0 md:max-w-md animate-in zoom-in-50 fade-in duration-1000 ease-out">
+    <div className="w-64 md:w-96 animate-in zoom-in-95 duration-1000 ease-out">
        <img src="perabalon.png" alt="Pera Balon" className="w-full h-auto object-contain" />
     </div>
   </div>
