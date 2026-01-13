@@ -377,6 +377,7 @@ function getStatusColor(status: string) {
 function getProductImage(productName: string, inventory: InventoryItem[]) {
   const product = inventory.find(p => p.name === productName);
   return product ? product.image : "https://via.placeholder.com/100?text=No+Img";
+
 }
 
 // --- BİLEŞENLER ---
@@ -1457,7 +1458,7 @@ function LoginPage({ onLogin }: any) {
 const SplashScreen = () => (
   <div className="fixed inset-0 bg-white z-[9999] flex items-center justify-center animate-in fade-in duration-700">
     <div className="w-64 md:w-96 animate-in zoom-in-95 duration-1000 ease-out">
-       <img src="perabalon.png" alt="Pera Balon" className="w-full h-auto object-contain" />
+       <img src="perabalon.gif" alt="Pera Balon" className="w-full h-auto object-contain" />
     </div>
   </div>
 );
@@ -1471,7 +1472,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoadingApp(false);
-    }, 2500); // 2.5 saniye sonra splash screen kapanır
+    }, 3000); // 2.5 saniye sonra splash screen kapanır
     return () => clearTimeout(timer);
   }, []);
 
