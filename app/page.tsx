@@ -51,7 +51,7 @@ import {
   Database
 } from 'lucide-react';
 
-// --- YARDIMCI FONKSİYONLAR (HELPERS) ---
+// --- YARDIMCI FONKSİYONLAR ---
 
 function getRelativeDate(days: number) {
   const date = new Date();
@@ -75,7 +75,7 @@ function calculateDaysLeft(deadline: string) {
   return diffDays;
 }
 
-// --- TİP TANIMLAMALARI (TYPES) ---
+// --- TİP TANIMLAMALARI ---
 
 interface InventoryItem {
   id: number;
@@ -130,223 +130,29 @@ interface Supply {
   estimatedArrival: string;
 }
 
-// --- ÖRNEK VERİLER (MOCK DATA) ---
+// --- ÖRNEK VERİLER ---
 
 const INITIAL_INVENTORY: InventoryItem[] = [
-  { 
-    id: 1, 
-    name: "Ahşap Yapboz Seti", 
-    sku: "OY-001", 
-    stock: 150, 
-    safetyStock: 20, 
-    price: 250, 
-    cost: 120, 
-    supplier: "Oyuncak Toptancısı A.Ş.",
-    category: "Eğitici",
-    image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 2, 
-    name: "Uzaktan Kumandalı Araba", 
-    sku: "OY-002", 
-    stock: 8, 
-    safetyStock: 15, 
-    price: 1250.50, 
-    cost: 750,
-    supplier: "Temu", 
-    category: "Elektronik",
-    image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 3, 
-    name: "Peluş Ayıcık (Büyük)", 
-    sku: "OY-003", 
-    stock: 45, 
-    safetyStock: 10, 
-    price: 450, 
-    cost: 200,
-    supplier: "Oyuncak Toptancısı A.Ş.",
-    category: "Peluş",
-    image: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 4, 
-    name: "Drone Pervane Seti", 
-    sku: "YD-001", 
-    stock: 4, 
-    safetyStock: 50, 
-    price: 80, 
-    cost: 25,
-    supplier: "AliExpress",
-    category: "Yedek Parça",
-    image: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 5, 
-    name: "Oyun Hamuru Seti (12 Renk)", 
-    sku: "OY-004", 
-    stock: 200, 
-    safetyStock: 30, 
-    price: 120, 
-    cost: 60, 
-    supplier: "Oyuncak Toptancısı A.Ş.",
-    category: "Eğitici",
-    image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 6, 
-    name: "LED Işık Şeridi (5m)", 
-    sku: "EL-005", 
-    stock: 85, 
-    safetyStock: 10, 
-    price: 150, 
-    cost: 70, 
-    supplier: "AliExpress",
-    category: "Elektronik",
-    image: "https://images.unsplash.com/photo-1563456020-0551061917f8?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 7, 
-    name: "Renkli Balon Paketi (100'lü)", 
-    sku: "BL-001", 
-    stock: 500, 
-    safetyStock: 100, 
-    price: 85, 
-    cost: 30, 
-    supplier: "Parti Dünyası",
-    category: "Parti",
-    image: "https://images.unsplash.com/photo-1530103862676-de3c9da59af7?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 8, 
-    name: "Helyum Tüpü (Kullan-At)", 
-    sku: "BL-002", 
-    stock: 12, 
-    safetyStock: 5, 
-    price: 850, 
-    cost: 450, 
-    supplier: "Parti Dünyası",
-    category: "Parti",
-    image: "https://images.unsplash.com/photo-1582236873967-0c7f2122396e?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 9, 
-    name: "Konfetili Balon (Altın)", 
-    sku: "BL-003", 
-    stock: 150, 
-    safetyStock: 40, 
-    price: 45, 
-    cost: 15, 
-    supplier: "Parti Dünyası",
-    category: "Parti",
-    image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=100&h=100"
-  },
-  { 
-    id: 10, 
-    name: "Doğum Günü Banner Seti", 
-    sku: "PT-001", 
-    stock: 60, 
-    safetyStock: 15, 
-    price: 120, 
-    cost: 50, 
-    supplier: "Parti Dünyası",
-    category: "Parti",
-    image: "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?auto=format&fit=crop&q=80&w=100&h=100"
-  }
+  { id: 1, name: "Ahşap Yapboz Seti", sku: "OY-001", stock: 150, safetyStock: 20, price: 250, cost: 120, supplier: "Oyuncak Toptancısı A.Ş.", category: "Eğitici", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 2, name: "Uzaktan Kumandalı Araba", sku: "OY-002", stock: 8, safetyStock: 15, price: 1250.50, cost: 750, supplier: "Temu", category: "Elektronik", image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 3, name: "Peluş Ayıcık (Büyük)", sku: "OY-003", stock: 45, safetyStock: 10, price: 450, cost: 200, supplier: "Oyuncak Toptancısı A.Ş.", category: "Peluş", image: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 4, name: "Drone Pervane Seti", sku: "YD-001", stock: 4, safetyStock: 50, price: 80, cost: 25, supplier: "AliExpress", category: "Yedek Parça", image: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 5, name: "Oyun Hamuru Seti (12 Renk)", sku: "OY-004", stock: 200, safetyStock: 30, price: 120, cost: 60, supplier: "Oyuncak Toptancısı A.Ş.", category: "Eğitici", image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 6, name: "LED Işık Şeridi (5m)", sku: "EL-005", stock: 85, safetyStock: 10, price: 150, cost: 70, supplier: "AliExpress", category: "Elektronik", image: "https://images.unsplash.com/photo-1563456020-0551061917f8?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 7, name: "Renkli Balon Paketi (100'lü)", sku: "BL-001", stock: 500, safetyStock: 100, price: 85, cost: 30, supplier: "Parti Dünyası", category: "Parti", image: "https://images.unsplash.com/photo-1530103862676-de3c9da59af7?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 8, name: "Helyum Tüpü (Kullan-At)", sku: "BL-002", stock: 12, safetyStock: 5, price: 850, cost: 450, supplier: "Parti Dünyası", category: "Parti", image: "https://images.unsplash.com/photo-1582236873967-0c7f2122396e?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 9, name: "Konfetili Balon (Altın)", sku: "BL-003", stock: 150, safetyStock: 40, price: 45, cost: 15, supplier: "Parti Dünyası", category: "Parti", image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=100&h=100" },
+  { id: 10, name: "Doğum Günü Banner Seti", sku: "PT-001", stock: 60, safetyStock: 15, price: 120, cost: 50, supplier: "Parti Dünyası", category: "Parti", image: "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?auto=format&fit=crop&q=80&w=100&h=100" }
 ];
 
 const INITIAL_ORDERS: Order[] = [
-  { 
-    id: 101, 
-    customer: "Ahmet Yılmaz", 
-    city: "İstanbul", 
-    address: "Atatürk Mah. Cumhuriyet Cad. No:12 D:5, Kadıköy",
-    platform: "Trendyol", 
-    items: [{ name: "Uzaktan Kumandalı Araba", qty: 2 }],
-    date: getRelativeDate(0), 
-    deadline: getRelativeDate(-2), 
-    status: "Hazırlanıyor", 
-    total: 2501.00, 
-    assignedTo: "Mehmet Demir" 
-  },
-  { 
-    id: 102, 
-    customer: "Ayşe Demir", 
-    city: "Ankara", 
-    address: "Çankaya Mah. Hoşdere Cad. No:44, Çankaya",
-    platform: "Instagram", 
-    items: [{ name: "Peluş Ayıcık (Büyük)", qty: 1 }],
-    date: getRelativeDate(0), 
-    deadline: getRelativeDate(1), 
-    status: "Yeni", 
-    total: 450.00, 
-    assignedTo: null 
-  },
-  { 
-    id: 103, 
-    customer: "Kırtasiye Dünyası", 
-    city: "İzmir", 
-    address: "Alsancak Mah. Kıbrıs Şehitleri Cad. No:10, Konak",
-    platform: "B2B Panel", 
-    items: [{ name: "Ahşap Yapboz Seti", qty: 50 }, { name: "Drone Pervane Seti", qty: 10 }],
-    date: getRelativeDate(5), 
-    deadline: getRelativeDate(2), 
-    status: "Kargolandı", 
-    total: 13300.00, 
-    assignedTo: "Selin Yılmaz" 
-  },
-  { 
-    id: 104, 
-    customer: "Mehmet Öz", 
-    city: "Bursa", 
-    address: "Nilüfer Mah. Fatih Sultan Mehmet Bulv. No:88, Nilüfer",
-    platform: "Hepsiburada", 
-    items: [{ name: "Drone Pervane Seti", qty: 1 }],
-    date: getRelativeDate(30), 
-    deadline: getRelativeDate(25), 
-    status: "Tamamlandı", 
-    total: 80.00, 
-    assignedTo: null 
-  },
-  { 
-    id: 105, 
-    customer: "Zeynep Kaya", 
-    city: "Antalya", 
-    address: "Lara Yolu Üzeri, No:15, Muratpaşa",
-    platform: "Trendyol", 
-    items: [{ name: "Oyun Hamuru Seti (12 Renk)", qty: 2 }],
-    date: getRelativeDate(1), 
-    deadline: getRelativeDate(3), 
-    status: "Yeni", 
-    total: 240.00, 
-    assignedTo: null 
-  },
-  { 
-    id: 106, 
-    customer: "Parti Organizasyon Ltd.", 
-    city: "İstanbul", 
-    address: "Etiler Mah. Nispetiye Cad. No:100, Beşiktaş",
-    platform: "B2B Panel", 
-    items: [{ name: "Renkli Balon Paketi (100'lü)", qty: 20 }, { name: "Helyum Tüpü (Kullan-At)", qty: 5 }],
-    date: getRelativeDate(0), 
-    deadline: getRelativeDate(2), 
-    status: "Hazırlanıyor", 
-    total: 5950.00, 
-    assignedTo: "Mehmet Demir" 
-  },
-  { 
-    id: 107, 
-    customer: "Ali Vural", 
-    city: "Adana", 
-    address: "Seyhan Mah. Atatürk Cad. No:55, Seyhan",
-    platform: "Hepsiburada", 
-    items: [{ name: "Konfetili Balon (Altın)", qty: 10 }],
-    date: getRelativeDate(2), 
-    deadline: getRelativeDate(5), 
-    status: "Yeni", 
-    total: 450.00, 
-    assignedTo: null 
-  }
+  { id: 101, customer: "Ahmet Yılmaz", city: "İstanbul", address: "Atatürk Mah. Cumhuriyet Cad. No:12 D:5, Kadıköy", platform: "Trendyol", items: [{ name: "Uzaktan Kumandalı Araba", qty: 2 }], date: getRelativeDate(0), deadline: getRelativeDate(-2), status: "Hazırlanıyor", total: 2501.00, assignedTo: "Mehmet Demir" },
+  { id: 102, customer: "Ayşe Demir", city: "Ankara", address: "Çankaya Mah. Hoşdere Cad. No:44, Çankaya", platform: "Instagram", items: [{ name: "Peluş Ayıcık (Büyük)", qty: 1 }], date: getRelativeDate(0), deadline: getRelativeDate(1), status: "Yeni", total: 450.00, assignedTo: null },
+  { id: 103, customer: "Kırtasiye Dünyası", city: "İzmir", address: "Alsancak Mah. Kıbrıs Şehitleri Cad. No:10, Konak", platform: "B2B Panel", items: [{ name: "Ahşap Yapboz Seti", qty: 50 }, { name: "Drone Pervane Seti", qty: 10 }], date: getRelativeDate(5), deadline: getRelativeDate(2), status: "Kargolandı", total: 13300.00, assignedTo: "Selin Yılmaz" },
+  { id: 104, customer: "Mehmet Öz", city: "Bursa", address: "Nilüfer Mah. Fatih Sultan Mehmet Bulv. No:88, Nilüfer", platform: "Hepsiburada", items: [{ name: "Drone Pervane Seti", qty: 1 }], date: getRelativeDate(30), deadline: getRelativeDate(25), status: "Tamamlandı", total: 80.00, assignedTo: null },
+  { id: 105, customer: "Zeynep Kaya", city: "Antalya", address: "Lara Yolu Üzeri, No:15, Muratpaşa", platform: "Trendyol", items: [{ name: "Oyun Hamuru Seti (12 Renk)", qty: 2 }], date: getRelativeDate(1), deadline: getRelativeDate(3), status: "Yeni", total: 240.00, assignedTo: null },
+  { id: 106, customer: "Parti Organizasyon Ltd.", city: "İstanbul", address: "Etiler Mah. Nispetiye Cad. No:100, Beşiktaş", platform: "B2B Panel", items: [{ name: "Renkli Balon Paketi (100'lü)", qty: 20 }, { name: "Helyum Tüpü (Kullan-At)", qty: 5 }], date: getRelativeDate(0), deadline: getRelativeDate(2), status: "Hazırlanıyor", total: 5950.00, assignedTo: "Mehmet Demir" },
+  { id: 107, customer: "Ali Vural", city: "Adana", address: "Seyhan Mah. Atatürk Cad. No:55, Seyhan", platform: "Hepsiburada", items: [{ name: "Konfetili Balon (Altın)", qty: 10 }], date: getRelativeDate(2), deadline: getRelativeDate(5), status: "Yeni", total: 450.00, assignedTo: null }
 ];
 
 const INITIAL_SUPPLIES: Supply[] = [
@@ -1452,11 +1258,11 @@ function LoginPage({ onLogin }: any) {
   );
 }
 
-// --- GÜNCELLENMİŞ SPLASH SCREEN BİLEŞENİ (MASTERCARD STİLİ) ---
+// --- GÜNCELLENMİŞ SPLASH SCREEN BİLEŞENİ (MASTERCARD + POP EFFECT) ---
 
 const SplashScreen = () => {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white overflow-hidden">
       {/* CSS Stillerini burada tanımlıyoruz */}
       <style dangerouslySetInnerHTML={{__html: `
         /* --- CSS ANİMASYON KODLARIMIZ --- */
@@ -1471,7 +1277,7 @@ const SplashScreen = () => {
 
         /* 1. SARI PARÇA (SOLDAN GELECEK) */
         #sari-balon {
-            opacity: 0.9; /* Mastercard gibi hafif şeffaflık hissi */
+            opacity: 0.9;
             transform-box: fill-box;
             transform-origin: center;
             animation: moveLeft 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
@@ -1487,64 +1293,89 @@ const SplashScreen = () => {
 
         /* 3. KESİŞİM PARÇASI (ORTADA OLUŞACAK) */
         #kesisim-parcasi {
-            opacity: 0; /* Başlangıçta görünmez */
+            opacity: 0;
             transform-box: fill-box;
             transform-origin: center;
-            /* İki parça birleştiği anda belirecek */
             animation: blendReveal 1.5s ease-in-out forwards;
         }
 
-        /* 4. YAZI ANİMASYONU */
+        /* 4. YAZI ANİMASYONU (GELİŞ) */
         #yazi {
             opacity: 0;
             transform: translateY(15px);
-            animation: simpleFade 0.8s ease-out forwards 1.2s; /* İkon oturduktan sonra */
+            animation: simpleFade 0.8s ease-out forwards 1.2s;
         }
+
+        /* 5. LOGO UÇUŞ VE PATLAMA EFEKTİ (ÇIKIŞ) */
+        /* Tüm ikon grubunu sarmalayan kaotik uçuş animasyonu */
+        #ikon {
+            transform-box: fill-box;
+            transform-origin: center;
+            /* 2.5s bekler (giriş bitsin diye), sonra 1.2s boyunca uçar, sonra patlar */
+            animation: chaoticFly 1.2s ease-in-out forwards 2.5s; 
+        }
+        
+        /* Yazı da logo uçarken hafifçe silinsin */
+        #yazi {
+            animation: simpleFade 0.8s ease-out forwards 1.2s, fadeOut 0.5s ease-out forwards 3.5s;
+        }
+
+        /* 6. BALONCUKLAR (PARTICLES) */
+        #particles circle {
+            opacity: 0;
+            transform: scale(0);
+            transform-origin: center;
+            /* Hepsi 3.7. saniyede (uçuş bitince) patlasın */
+            animation: particlePop 0.6s ease-out forwards 3.6s;
+        }
+
+        /* Baloncuklara rastgele yönler verelim */
+        #p1 { --tx: -50px; --ty: -50px; }
+        #p2 { --tx: 50px; --ty: -50px; }
+        #p3 { --tx: -50px; --ty: 50px; }
+        #p4 { --tx: 50px; --ty: 50px; }
+        #p5 { --tx: 0px; --ty: -80px; }
+        #p6 { --tx: 0px; --ty: 80px; }
+        #p7 { --tx: -80px; --ty: 0px; }
+        #p8 { --tx: 80px; --ty: 0px; }
 
         /* --- KEYFRAMES --- */
 
         @keyframes moveLeft {
-            0% {
-                transform: translateX(-120px) scale(0.8); /* Uzaktan başla */
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0) scale(1); /* Yerine otur */
-                opacity: 1;
-            }
+            0% { transform: translateX(-120px) scale(0.8); opacity: 0; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
         }
-
         @keyframes moveRight {
-            0% {
-                transform: translateX(120px) scale(0.8); /* Uzaktan başla */
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0) scale(1); /* Yerine otur */
-                opacity: 1;
-            }
+            0% { transform: translateX(120px) scale(0.8); opacity: 0; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
         }
-
         @keyframes blendReveal {
-            0%, 50% { 
-                opacity: 0; 
-                transform: scale(0.5);
-            }
-            70% {
-                opacity: 0.6; /* Karışıyor hissi */
-                transform: scale(1.1); /* Hafif taşma */
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1);
-            }
+            0%, 50% { opacity: 0; transform: scale(0.5); }
+            70% { opacity: 0.6; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes simpleFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: scale(0.9); }
         }
 
-        @keyframes simpleFade {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Havası kaçan balon gibi titrek uçuş */
+        @keyframes chaoticFly {
+            0% { transform: translate(0,0) scale(1); }
+            20% { transform: translate(-10px, -20px) rotate(-5deg) scale(0.95); }
+            40% { transform: translate(15px, 10px) rotate(5deg) scale(0.9); }
+            60% { transform: translate(-20px, 5px) rotate(-10deg) scale(0.85); }
+            80% { transform: translate(10px, -15px) rotate(5deg) scale(0.8); opacity: 1; }
+            95% { transform: translate(0, 0) scale(1.2); opacity: 1; } /* Şişme efekti */
+            100% { transform: scale(1.5); opacity: 0; } /* PATLAMA! */
+        }
+
+        /* Baloncukların dağılması */
+        @keyframes particlePop {
+            0% { transform: translate(0,0) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
         }
       `}} />
 
@@ -1577,6 +1408,18 @@ const SplashScreen = () => {
             {/* Kesişim Parçası */}
             <path id="kesisim-parcasi" className="cls-4" d="M310.31,83.68c9.89,13.67,16.73,29,23.86,44.15a516.84,516.84,0,0,1,24.05,61.83c9.31,28.94,17.24,58.26,21,88.53.75,5.93,3.13,11.67,2,17.81-11.21,7.76-22.3,15.68-33.65,23.22-8.2,5.45-15.66,12-25.73,14.53-16.14,4.07-28.51-4.71-35.6-16.41C276,300.41,272.91,281.44,271.67,262c-.59-9.32-1.58-18.61-1.18-28,1.59-36.76,6.65-72.83,19.5-107.62,5-13.42,10.92-26.3,17-39.19A7.58,7.58,0,0,1,310.31,83.68Z"/>
         </g>
+
+        {/* PARÇACIKLAR (PATLAMA EFEKTİ İÇİN GİZLİ DAİRELER) */}
+        <g id="particles" transform="translate(325, 415)"> {/* İkonun merkezi civarı */}
+            <circle id="p1" r="10" fill="#bf5359" />
+            <circle id="p2" r="8" fill="#f4ad91" />
+            <circle id="p3" r="12" fill="#df7848" />
+            <circle id="p4" r="6" fill="#f1b04e" />
+            <circle id="p5" r="9" fill="#2c7fae" />
+            <circle id="p6" r="7" fill="#bf5359" />
+            <circle id="p7" r="11" fill="#f4ad91" />
+            <circle id="p8" r="5" fill="#df7848" />
+        </g>
       </svg>
     </div>
   );
@@ -1591,7 +1434,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoadingApp(false);
-    }, 3000); // 3 saniye sonra splash screen kapanır (Animasyon süresine göre ayarlandı)
+    }, 4500); // SÜREYİ ARTTIRDIK: 4.5 sn (Animasyonun tamamlanması için)
     return () => clearTimeout(timer);
   }, []);
 
