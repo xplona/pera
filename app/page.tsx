@@ -361,16 +361,6 @@ const INITIAL_USERS: UserData[] = [
   { id: 3, name: "Selin Yılmaz", role: "Satış Uzmanı", email: "selin@perabalon.com", phone: "0544 222 33 44", avatar: null, initials: "SY" },
 ];
 
-// --- SPLASH SCREEN BİLEŞENİ ---
-
-const SplashScreen = () => (
-  <div className="fixed inset-0 bg-white z-[9999] flex items-center justify-center animate-in fade-in duration-700">
-    <div className="w-64 md:w-96 animate-in zoom-in-95 duration-1000 ease-out">
-       <img src="perabalon.png" alt="Pera Balon" className="w-full h-auto object-contain" />
-    </div>
-  </div>
-);
-
 // --- STİL HELPERLARI ---
 
 function getStatusColor(status: string) {
